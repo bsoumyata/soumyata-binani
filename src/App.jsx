@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { usePageTracking } from './hooks/usePageTracking'
 import LandingPage from './pages/LandingPage'
-import ForApple from './pages/for-Apple'
+import ProposalPage from './pages/ProposalPage'
 
 function AppRoutes() {
   usePageTracking()
@@ -9,7 +9,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/for-apple" element={<ForApple />} />
+      <Route path="/for-:company" element={<ProposalPage />} />
     </Routes>
   )
 }

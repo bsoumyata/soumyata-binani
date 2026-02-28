@@ -51,18 +51,15 @@ Configuration Files:
 
 ## Adding New Proposal Pages
 
-To add another company:
+You no longer need to touch `App.jsx` when adding proposals. The router
+handles any path of the form `/for-[company]` automatically.
 
-1. Create a new file in `src/pages/` named `for-[Company].jsx`.
+1. Create a new file in `src/pages/` named `for-[company].jsx` (kebab-case).
 2. Copy the structure from `for-Apple.jsx` and update the header/title.
-3. Import and add a route in `src/App.jsx`:
-   ```jsx
-   import ForMicrosoft from './pages/for-Microsoft'
-   // …
-   <Route path="/for-microsoft" element={<ForMicrosoft />} />
-   ```
+3. Link to it from the landing page or anywhere else using `/for-[company]`.
 
-4. Update the landing page link if desired.
+The dynamic loader will render your component if it exists, otherwise a
+friendly "not found" message will appear.
 
 ## Routing
 
