@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: soumyata-binani
+    env: static
+    branch: main
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
