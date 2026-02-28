@@ -5,7 +5,7 @@ import App from './App.jsx'
 import './index.css'
 
 // initialize GA — disable automatic page_view since usePageTracking handles it
-const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'
+const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-H3C5BJGTQE'
 ReactGA.initialize(measurementId, {
   gtagOptions: { send_page_view: false },
 })
