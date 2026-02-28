@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage'
 import ForApple from './pages/for-Apple'
 import ForTomoCredit from './pages/for-TomoCredit'
 import ForFeathr from './pages/for-Feathr'
+import ForTollBit from './pages/for-TollBit'
 
 function AppRoutes() {
   usePageTracking()
@@ -14,6 +15,7 @@ function AppRoutes() {
       <Route path="/for-Apple" element={<ForApple />} />
       <Route path="/for-TomoCredit" element={<ForTomoCredit />} />
       <Route path="/for-Feathr" element={<ForFeathr />} />
+      <Route path="/for-TollBit" element={<ForTollBit />} />
     </Routes>
   )
 }
