@@ -8,14 +8,8 @@ export default function LandingPage() {
         Hi, I'm Soumyata
       </h1>
       <p className="text-lg text-gray-600 mb-8 text-center max-w-md">
-        Welcome to my portfolio. Click below to view the Apple proposal.
+        Welcome to my portfolio
       </p>
-      <Link
-        to="/for-apple"
-        className="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-      >
-        View Apple Proposal
-      </Link>
     </div>
   )
 }
