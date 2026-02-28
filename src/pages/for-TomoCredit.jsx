@@ -230,6 +230,8 @@ const Roadmap = () => {
 
 const ContactModal = ({ isOpen, onClose, email }) => {
   const [copied, setCopied] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const linkedinUrl = "https://www.linkedin.com/in/soumyatabinani/";
 
   useEffect(() => {
     if (copied) {
@@ -237,6 +239,13 @@ const ContactModal = ({ isOpen, onClose, email }) => {
       return () => clearTimeout(timer);
     }
   }, [copied]);
+
+  useEffect(() => {
+    if (copiedLink) {
+      const timer = setTimeout(() => setCopiedLink(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [copiedLink]);
 
   const handleCopy = () => {
     // Fallback for document.execCommand in restricted iframes
@@ -259,6 +268,26 @@ const ContactModal = ({ isOpen, onClose, email }) => {
     textArea.remove();
   };
 
+  const handleCopyLink = () => {
+    const textArea = document.createElement("textarea");
+    textArea.value = linkedinUrl;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+      setCopiedLink(true);
+    } catch (err) {
+      console.error('Failed to copy link', err);
+    }
+
+    textArea.remove();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -277,7 +306,7 @@ const ContactModal = ({ isOpen, onClose, email }) => {
           </div>
           <h3 className="text-xl font-bold text-white mb-2">Let's build together</h3>
           <p className="text-slate-400 text-sm mb-6">
-            I'm ready to bring my data-driven execution and startup hustle to the TomoCredit team. Copy my email below to get in touch.
+            I'm ready to bring my data-driven execution and startup hustle to the TomoCredit team. Copy my email below or tap the LinkedIn link to get in touch.
           </p>
 
           <div 
@@ -293,6 +322,32 @@ const ContactModal = ({ isOpen, onClose, email }) => {
               <Copy className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition-colors" />
             )}
           </div>
+
+          {/* LinkedIn contact row */}
+          <div 
+            onClick={handleCopyLink}
+            className="mt-4 flex items-center justify-between bg-slate-950 border border-slate-800 hover:border-blue-500/50 rounded-lg p-3 cursor-pointer transition-all group"
+          >
+            <span className="text-slate-300 font-mono text-sm">{linkedinUrl}</span>
+            {copiedLink ? (
+              <span className="text-emerald-400 text-xs font-semibold flex items-center gap-1">
+                <CheckCircle2 className="w-4 h-4" /> Copied
+              </span>
+            ) : (
+              <Copy className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition-colors" />
+            )}
+          </div>
+          {/* direct visit link */}
+          <p className="mt-2 text-sm">
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-emerald-400 hover:underline"
+            >
+              <Linkedin className="w-4 h-4 mr-1" /> Visit my LinkedIn
+            </a>
+          </p>
         </div>
       </div>
     </div>
