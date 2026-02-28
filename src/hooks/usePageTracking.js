@@ -8,7 +8,9 @@ export function usePageTracking() {
   useEffect(() => {
     ReactGA.send({
       hitType: 'pageview',
-      page: location.pathname + location.search,
+      page_path: location.pathname + location.search,
+      page_location: window.location.origin + location.pathname + location.search,
+      page_title: document.title,
     })
   }, [location])
 }

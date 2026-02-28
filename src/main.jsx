@@ -4,9 +4,11 @@ import ReactGA from 'react-ga4'
 import App from './App.jsx'
 import './index.css'
 
-// initialize GA
+// initialize GA — disable automatic page_view since usePageTracking handles it
 const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'
-ReactGA.initialize(measurementId)
+ReactGA.initialize(measurementId, {
+  gtagOptions: { send_page_view: false },
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
