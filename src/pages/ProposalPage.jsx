@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 // automatically import all proposal components in this directory
@@ -6,8 +6,12 @@ const proposalModules = import.meta.glob('./for-*.jsx')
 
 export default function ProposalPage() {
   const { company } = useParams()
-  const key = `./for-${company}.jsx`
-  const ComponentLoader = proposalModules[key]
+  const targetKey = `./for-${company}.jsx`
+  const matchedKey = Object.keys(proposalModules).find(
+    modulePath => modulePath.toLowerCase() === targetKey.toLowerCase(),
+  )
+  const ComponentLoader = matchedKey ? proposalModules[matchedKey] : null
+  const LazyProposal = ComponentLoader ? lazy(ComponentLoader) : null
 
   return (
     <div className="min-h-screen bg-white">
@@ -26,9 +30,9 @@ export default function ProposalPage() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-12">
-        {ComponentLoader ? (
+        {LazyProposal ? (
           <Suspense fallback={<p>Loading...</p>}>
-            <ComponentLoader />
+            <LazyProposal />
           </Suspense>
         ) : (
           <div className="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
