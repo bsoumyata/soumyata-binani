@@ -19,7 +19,9 @@ import {
   MousePointer2,
   Lightbulb,
   ShieldCheck,
-  Search
+  Search,
+  Activity,
+  MessageSquareQuote
 } from 'lucide-react';
 
 // --- Components ---
@@ -128,7 +130,6 @@ const ChallengeSection = () => {
           ))}
         </div>
         
-        {/* Humble Mission Note */}
         <div className="mt-16 p-8 rounded-3xl bg-slate-900 text-white flex flex-col md:flex-row items-center gap-8 shadow-xl">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-4">
@@ -156,10 +157,10 @@ const ChallengeSection = () => {
 
 const MathModel = () => {
   const [retention, setRetention] = useState(5); 
-  const [volume, setVolume] = useState(3); 
-  const [adoption, setAdoption] = useState(80); 
+  const [automation, setAutomation] = useState(30); 
+  const [accuracy, setAccuracy] = useState(85); 
 
-  const impactValue = (retention * volume * (adoption / 100) * 12).toFixed(0);
+  const impactValue = (retention * (automation / 10) * (accuracy / 100) * 12).toFixed(0);
 
   return (
     <section id="strategy" className="py-20 bg-[#11263c] text-white rounded-[3rem] mx-4 my-10 overflow-hidden relative shadow-2xl">
@@ -168,18 +169,48 @@ const MathModel = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-[#00BFA5] text-[10px] font-bold uppercase mb-4 border border-white/10">
-              Strategy: AI-Powered Retention Engine
+              Strategy: The "Loyalty Bridge"
             </div>
-            <h2 className="text-3xl font-bold mb-6 leading-tight">Driving Predictable Impact</h2>
+            <h2 className="text-3xl font-bold mb-6 leading-tight">Closing the Retention Gap</h2>
             <p className="text-slate-300 mb-8 leading-relaxed">
-              Building on Feathr's recent scaling success, the next frontier could be Retention Automation. By building AI playbooks that identify and re-engage lapsed donors, we can turn one-time marketing clicks into long-term funding engines.
+              Building on Feathr's recent success, I propose a <strong>Retention Automation Engine</strong>. This isn't just about emails; it's about a 3-pillar system that turns one-time donors into long-term partners.
             </p>
             
-            <div className="space-y-6">
+            <div className="space-y-6 mb-12">
               {[
-                { label: "Projected Retention Lift", val: retention, set: setRetention, min: 1, max: 20, unit: "%" },
-                { label: "Automated Campaigns", val: volume, set: setVolume, min: 1, max: 10, unit: "/mo" },
-                { label: "Team Adoption", val: adoption, set: setAdoption, min: 1, max: 100, unit: "%" }
+                { 
+                  title: "Predictive Churn Scoring", 
+                  desc: "Analyze donor behavior (last gift date, email opens) to flag 'at-risk' donors before they lapse.",
+                  icon: Activity 
+                },
+                { 
+                  title: "Auto-Impact Playbooks", 
+                  desc: "AI-generated impact stories triggered automatically when a donor reaches a milestone or is flagged at-risk.",
+                  icon: MessageSquareQuote 
+                },
+                { 
+                  title: "Integrated Attribution", 
+                  desc: "A single view that proves which ad campaign directly resulted in a recurring donation renewal.",
+                  icon: ShieldCheck 
+                }
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4 group">
+                  <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-[#00BFA5] border border-white/10 group-hover:bg-[#00BFA5] group-hover:text-white transition-all">
+                    <item.icon size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-6 pt-6 border-t border-white/10">
+              {[
+                { label: "Target Retention Lift", val: retention, set: setRetention, min: 1, max: 20, unit: "%" },
+                { label: "AI Automation Depth", val: automation, set: setAutomation, min: 10, max: 100, unit: "%" },
+                { label: "Prediction Accuracy", val: accuracy, set: setAccuracy, min: 50, max: 100, unit: "%" }
               ].map((s, i) => (
                 <div key={i}>
                   <div className="flex justify-between text-xs mb-2">
@@ -202,21 +233,21 @@ const MathModel = () => {
           <div className="bg-white rounded-3xl p-10 text-slate-900 shadow-inner">
             <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
               <TrendingUp className="text-[#00BFA5]" size={16} />
-              Strategic ROI Projection
+              Strategic Growth Projection
             </h4>
             <div className="flex items-baseline gap-2 mb-4">
               <span className="text-6xl font-black text-[#11263c] tracking-tighter">+{impactValue}%</span>
-              <span className="text-slate-400 font-bold text-lg">Growth</span>
+              <span className="text-slate-400 font-bold text-lg">Impact Lift</span>
             </div>
             <p className="text-sm text-slate-500 mb-8 font-medium leading-relaxed">
-              This simulated lift represents the compounding value of re-engaging just a small portion of a nonprofit's lapsed donor base through automated, AI-driven outreach.
+              This represents the compounding value of moving a nonprofit's focus from pure acquisition to a high-accuracy re-engagement strategy powered by AI.
             </p>
             
             <div className="space-y-3">
               {[
-                { label: "Donor Retention", val: "Scaleable", icon: Clock, color: "text-blue-600 bg-blue-50" },
-                { label: "Adoption Efficiency", val: "Optimized", icon: ShieldCheck, color: "text-teal-600 bg-teal-50" },
-                { label: "Attributed ROI", val: "High Visibility", icon: BarChart3, color: "text-indigo-600 bg-indigo-50" }
+                { label: "Predictive Health", val: "High Visibility", icon: Activity, color: "text-blue-600 bg-blue-50" },
+                { label: "Workflow Speed", val: "Instant", icon: Zap, color: "text-amber-600 bg-amber-50" },
+                { label: "Attributed ROI", val: "Board-Ready", icon: BarChart3, color: "text-indigo-600 bg-indigo-50" }
               ].map((m, idx) => (
                 <div key={idx} className="p-4 bg-slate-50 rounded-xl flex items-center justify-between border border-slate-100">
                   <div className="flex items-center gap-3">
@@ -469,7 +500,7 @@ export default function ForFeathr() {
             </a>
           </div>
           <div className="mt-20 pt-8 border-t border-slate-50 text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">
-            &copy; {new Date().getFullYear()} Soumyata Binani. Prepared with research for Feathr.
+            © {new Date().getFullYear()} Soumyata Binani. Prepared with research for Feathr.
           </div>
         </div>
       </footer>
